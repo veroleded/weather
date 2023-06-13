@@ -19,7 +19,11 @@ app.get('/auth/me', checkAuth, userControllers.getMe);
 app.post('/auth/login', loginValidation, userControllers.login);
 app.post('/auth/register', registerValidation, userControllers.register);
 
-app.post('/posts', postValidation, checkAuth, postControllers.createPost)
+app.post('/posts', checkAuth, postValidation, postControllers.createPost);
+app.get('/posts', postControllers.getAllPosts);
+app.get('/posts/:id', postControllers.getOnePost);
+app.delete('/posts/:id', checkAuth, postControllers.deletePost);
+app.patch('/posts/:id', checkAuth, postControllers.updatePost)
 
 
 app.listen(PORT, () => {

@@ -20,5 +20,9 @@ export default async (req: RequestCustom, res: Response, next: NextFunction) => 
         message: 'Access denied',
       });
     }
+  } else {
+    res.status(403).json({
+      message: 'Access denied',
+    });
   }
 };
