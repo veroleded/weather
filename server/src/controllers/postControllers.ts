@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { validationResult } from 'express-validator';
 import dotenv from 'dotenv';
 import { RequestCustom } from '../types/requestCustom';
 import { Prisma, PrismaClient } from '@prisma/client';
@@ -10,16 +9,6 @@ const prisma = new PrismaClient();
 
 export const createPost = async (req: RequestCustom, res: Response) => {
   try {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      console.error('post /posts', errors.array());
-
-      return res.status(400).json({
-        message: 'post validation error',
-        errors: errors.array(),
-      });
-    }
     const post = await prisma.post.create({
       data: {
         ...req.body,

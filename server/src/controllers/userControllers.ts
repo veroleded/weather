@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { validationResult } from 'express-validator';
 import dotenv from 'dotenv';
 import { PrismaClient, Prisma } from '@prisma/client';
 import { RequestCustom } from '../types/requestCustom.js';
@@ -14,15 +13,6 @@ const prisma = new PrismaClient();
 
 export const register = async (req: Request, res: Response) => {
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      console.error('post /auth/register', errors.array())
-      return res.status(400).json({
-        message: 'validation error',
-        errors: errors.array(),
-      });
-    }
-
     const { email, password, name, avatarUrl } = req.body;
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
@@ -65,20 +55,13 @@ export const register = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        message: 'validation error',
-        errors: errors.array(),
-      });
-    }
     const { email, password } = req.body;
     const { passwordHash, ...user } = await prisma.user.findUniqueOrThrow({
       where: { email },
     });
     const isValidPass = await bcrypt.compare(password, passwordHash);
     if (!isValidPass) {
-      console.error('pass and passhash !=')
+      console.error('pass and passhash !=');
       return res.status(400).json({
         message: 'Incorrect login or password',
       });
@@ -98,13 +81,13 @@ export const login = async (req: Request, res: Response) => {
         console.error('post/auth/login', error);
         return res.status(400).json({
           message: 'Incorrect login or password',
-        })
+        });
       }
     } else {
       console.error(error);
       res.status(500).json({
-        message: 'Failed to log in'
-      })
+        message: 'Failed to log in',
+      });
     }
   }
 };
@@ -114,8 +97,8 @@ export const getMe = async (req: RequestCustom, res: Response) => {
     const user = await prisma.user.findUniqueOrThrow({
       where: {
         id: req.userId,
-      }
-    })
+      },
+    });
     res.json(user);
   } catch (error) {
     console.error('get auth/me: ', error);
@@ -123,4 +106,4 @@ export const getMe = async (req: RequestCustom, res: Response) => {
       message: 'Access denied',
     });
   }
-}
+};
