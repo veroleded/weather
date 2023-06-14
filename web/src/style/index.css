@@ -1,13 +1,150 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-weight: 400;
+  font-family: 'Volkorn';
+  src: url('../fonts/Vollkorn/static/Vollkorn-Regular.ttf');
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-weight: 700;
+  font-family: 'Volkorn';
+  src: url('../fonts/Vollkorn/static/Vollkorn-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Butler Extra Bold';
+  src: url('../fonts/butler/Butler/Butler_ExtraBold.otf');
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Volkorn Regular', sans-serif;
+}
+
+.flex {
+  display: flex;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-90 {
+  width: 90%;
+}
+
+.pr-3 {
+  padding-right: 3px;
+}
+
+.pb-5 {
+  padding-bottom: 5px;
+}
+
+.link {
+  color: rgb(69, 118, 255);
+}
+
+.link:hover {
+  color: rgb(0, 68, 255);
+}
+
+/* Header */
+
+header {
+  background-color: rgb(69, 118, 255);
+  color: rgb(218, 228, 255);
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  box-shadow: 0px 8px 10px 3px rgb(144, 174, 255);
+}
+
+.logo {
+  margin-left: 1rem;
+  font-family: 'Butler Extra Bold', sans-serif;
+  font-size: 2em;
+  font-weight: bold;
+  text-shadow: px;
+}
+
+.user-icon-container {
+  margin-right: 10%;
+}
+
+.wrapper {
+  width: 90%;
+  max-width: 1170px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.auth-form-container {
+  background-color: rgb(218, 228, 255);
+  margin-top: 100px;
+  width: 500px;
+  height: auto;
+  flex-direction: column;
+  align-items: center;
+  border: 0.7px solid rgb(69, 118, 255);
+  border-radius: 4px;
+  padding: 10px;
+}
+.auth-form-container > h1 {
+  color: rgb(69, 118, 255);
+}
+
+.authForm {
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.auth-input {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: large;
+}
+
+.auth-input:focus {
+  outline: none;
+  box-shadow: 0px 0px 5px rgb(69, 118, 255);
+}
+
+.auth-input::placeholder {
+  color: rgb(69, 118, 255);
+  font-size: 1;
+  font-style: italic;
+}
+
+.form-error {
+  color: red;
+  font-size: small;
+  font-style: italic;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.btn {
+  padding: 7px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  background-color: rgb(69, 118, 255);
+  color: rgb(218, 228, 255);
+  font-size: larger;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.btn:active {
+  box-shadow: inset 0 0 30px rgb(0, 68, 255);
 }

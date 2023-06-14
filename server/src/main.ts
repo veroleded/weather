@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import multer from 'multer';
+import cors from 'cors';
 
 import { registerValidation, loginValidation } from './validations/userValidation.js';
 import { checkAuth, handleValidationsErrors } from './middlewares/index.js';
@@ -13,6 +14,8 @@ dotenv.config();
 const PORT = process.env.PORT ?? 4000;
 
 const app = express();
+
+app.use(cors());
 
 app.use('/uploads', express.static('uploads'));
 
