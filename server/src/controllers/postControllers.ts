@@ -28,11 +28,7 @@ export const createPost = async (req: RequestCustom, res: Response) => {
 
 export const getAllPosts = async (req: Request, res: Response) => {
   try {
-    const posts = await prisma.post.findMany({
-      where: {
-        published: true,
-      },
-    });
+    const posts = await prisma.post.findMany();
 
     res.json(posts);
   } catch (error) {

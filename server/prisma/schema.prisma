@@ -14,11 +14,12 @@ model User {
   id           Int       @id @default(autoincrement())
   email        String    @unique
   name         String
+  discription  String?
   passwordHash String
   avatarUrl    String?
-  post         Post[]
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
+  post         Post[]
   chats        Chat[]
   likes        Like[]
   messages     Message[]
@@ -30,7 +31,6 @@ model Post {
   title      String
   content    String?
   image      String?
-  published  Boolean   @default(false)
   author     User      @relation(fields: [authorId], references: [id])
   authorId   Int
   viewCount  Int       @default(0)

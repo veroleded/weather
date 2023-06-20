@@ -70,9 +70,16 @@ header {
   text-shadow: px;
 }
 
+.header-link {
+  color: inherit;
+  text-decoration: none;
+}
+
 .user-icon-container {
   margin-right: 10%;
 }
+
+/* auth */
 
 .wrapper {
   width: 90%;
@@ -93,6 +100,7 @@ header {
   border: 0.7px solid rgb(69, 118, 255);
   border-radius: 4px;
   padding: 10px;
+  box-shadow: 0px 0px 10px rgb(69, 118, 255);
 }
 .auth-form-container > h1 {
   color: rgb(69, 118, 255);
@@ -105,7 +113,7 @@ header {
   margin-bottom: 10px;
 }
 
-.auth-input {
+.input {
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
@@ -113,12 +121,12 @@ header {
   font-size: large;
 }
 
-.auth-input:focus {
+.input:focus {
   outline: none;
   box-shadow: 0px 0px 5px rgb(69, 118, 255);
 }
 
-.auth-input::placeholder {
+.input::placeholder {
   color: rgb(69, 118, 255);
   font-size: 1;
   font-style: italic;
@@ -126,7 +134,6 @@ header {
 
 .form-error {
   color: red;
-  font-size: small;
   font-style: italic;
   align-items: center;
   justify-content: flex-start;
@@ -143,8 +150,223 @@ header {
   border-radius: 5px;
   margin: 10px;
   cursor: pointer;
+  width: auto;
 }
 
 .btn:active {
   box-shadow: inset 0 0 30px rgb(0, 68, 255);
 }
+
+/* Profile */
+
+.profile-container {
+  margin-top: 30px;
+  background-color: rgb(218, 228, 255);
+  border: 0.7px solid rgb(69, 118, 255);
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px rgb(69, 118, 255);
+  justify-content: space-between;
+}
+
+.info-container {
+  margin: 10px;
+  width: max-content;
+  flex-direction: column;
+}
+
+.changer-container {
+  margin: 10px;
+  width: max-content;
+  flex-direction: column;
+}
+
+.avatar-container {
+  margin: 10px;
+  width: max-content;
+  flex-direction: column;
+}
+
+.avatar {
+  width: 300px;
+  height: 300px;
+  margin: 3px;
+  border-radius: 10px;
+}
+
+.drop-container {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px dashed #555;
+  color: #444;
+  cursor: pointer;
+  transition: background .2s ease-in-out, border .2s ease-in-out;
+}
+
+.drop-container:hover {
+  background: #eee;
+  border-color: #111;
+}
+
+.drop-container:hover .drop-title {
+  color: #222;
+}
+
+.drop-title {
+  color: #444;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  transition: color .2s ease-in-out;
+}
+
+input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: #084cdf;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s ease-in-out;
+}
+
+input[type=file]::file-selector-button:hover {
+  background: #0d45a5;
+}
+
+/* Modal */
+
+    /* свойства модального окна по умолчанию */
+    .modal {
+      position: fixed;
+      /* фиксированное положение */
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.5);
+      /* цвет фона */
+      z-index: 1050;
+      /* по умолчанию модальное окно прозрачно */
+      -webkit-transition: opacity 400ms ease-in;
+      -moz-transition: opacity 400ms ease-in;
+      transition: opacity 400ms ease-in;
+      /* анимация перехода */
+      /* элемент невидим для событий мыши */
+    }
+
+    /* при отображении модального окно */
+    .modal:target {
+      opacity: 1;
+      pointer-events: auto;
+      overflow-y: auto;
+    }
+
+    /* ширина модального окна и его отступы от экрана */
+    .modal-dialog {
+      position: relative;
+      width: auto;
+      max-width: 100%;
+      margin: 10px;
+    }
+
+    @media (min-width: 576px) {
+      .modal-dialog {
+        max-width: 500px;
+        margin: 30px auto;
+      }
+    }
+
+    /* свойства для блока, содержащего контент модального окна */
+    .modal-content {
+      position: relative;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      background-color: #fff;
+      -webkit-background-clip: padding-box;
+      background-clip: padding-box;
+      border: 1px solid rgba(0, 0, 0, .2);
+      border-radius: .3rem;
+      outline: 0;
+    }
+
+    @media (min-width: 768px) {
+      .modal-content {
+        -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+      }
+    }
+
+    /* свойства для заголовка модального окна */
+    .modal-header {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      padding: 15px;
+      border-bottom: 1px solid #eceeef;
+    }
+
+    .modal-title {
+      margin-top: 0;
+      margin-bottom: 0;
+      line-height: 1.5;
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+
+    /* свойства для кнопки "Закрыть" */
+    .close {
+      float: right;
+      font-family: sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1;
+      color: #000;
+      text-shadow: 0 1px 0 #fff;
+      opacity: .5;
+      text-decoration: none;
+    }
+
+    /* свойства для кнопки "Закрыть" при нахождении её в фокусе или наведении */
+    .close:focus,
+    .close:hover {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+      opacity: .75;
+    }
+
+    /* свойства для блока, содержащего основное содержимое окна */
+    .modal-body {
+      position: relative;
+      -webkit-box-flex: 1;
+      -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      padding: 15px;
+      overflow: auto;
+    }

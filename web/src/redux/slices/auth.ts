@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import apiRoutes from '../../routes/apiRoutes';
 import axiosInstance from '../../axios';
+import { RootState } from '../store';
 
-interface IUserData {
+export interface IUserData {
   id: number;
   name: string;
   email: string;
@@ -11,14 +12,16 @@ interface IUserData {
   updatedAt: string;
 }
 
-interface IState {
+interface IStateAuth {
   data: IUserData | null;
   status: 'loading' | 'load' | 'error';
+  isAuth: boolean
 }
 
-const initialState: IState = {
+const initialState: IStateAuth = {
   data: null,
   status: 'loading',
+  isAuth: false,
 };
 
 export const fetchAuth = createAsyncThunk(
@@ -29,27 +32,75 @@ export const fetchAuth = createAsyncThunk(
   },
 );
 
+export const fetchAuthMe = createAsyncThunk(
+  'auth/fetchAuthMe',
+  async () => {
+    const { data } = await axiosInstance.get(apiRoutes.getMe());
+    return data;
+  },
+);
+
+export const fetchRegister = createAsyncThunk(
+  'auth/fetchRegister',
+  async (value: { email: string; password: string, name: string }) => {
+    const { data } = await axiosInstance.post(apiRoutes.register(), value);
+    return data;
+  },
+)
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     logout: (state) => {
       state.data = null;
+      state.isAuth = false;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAuth.pending, (state) => {
         state.status = 'loading';
+        state.isAuth = false;
       })
       .addCase(fetchAuth.fulfilled, (state, action) => {
         state.status = 'load';
         state.data = action.payload;
+        state.isAuth = true;
       })
       .addCase(fetchAuth.rejected, (state) => {
         state.status = 'error';
+        state.isAuth = false;
+      })
+      .addCase(fetchAuthMe.pending, (state) => {
+        state.status = 'loading';
+        state.isAuth = false;
+      })
+      .addCase(fetchAuthMe.fulfilled, (state, action) => {
+        state.status = 'load';
+        state.data = action.payload;
+        state.isAuth = true;
+      })
+      .addCase(fetchAuthMe.rejected, (state) => {
+        state.status = 'error';
+        state.isAuth = false;
+      })
+      .addCase(fetchRegister.pending, (state) => {
+        state.status = 'loading';
+        state.isAuth = false;
+      })
+      .addCase(fetchRegister.fulfilled, (state, action) => {
+        state.status = 'load';
+        state.data = action.payload;
+        state.isAuth = true;
+      })
+      .addCase(fetchRegister.rejected, (state) => {
+        state.status = 'error';
+        state.isAuth = false;
       });
   },
 });
 
+export const selectIsAuth = (state: RootState) => state.auth.isAuth
 export const authReducer = authSlice.reducer;
+export const { logout } = authSlice.actions;

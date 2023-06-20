@@ -22,7 +22,7 @@ export const register = async (req: Request, res: Response) => {
         name,
         email,
         passwordHash: hash,
-        avatarUrl,
+        avatarUrl: avatarUrl ?? '/uploads/noavatar.png',
       },
     });
 
