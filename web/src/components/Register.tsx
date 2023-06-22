@@ -73,7 +73,7 @@ const Register = () => {
             placeholder="Email"
           />
           {formik.errors.email && (
-            <div className="form-error flex">
+            <div className="error flex">
               <WarningSvg /> <span>{formik.errors.email}</span>
             </div>
           )}
@@ -91,7 +91,7 @@ const Register = () => {
             placeholder="Имя"
           />
           {formik.errors.name && (
-            <div className="form-error flex">
+            <div className="error flex">
               <WarningSvg /> <span>{formik.errors.name}</span>
             </div>
           )}
@@ -109,7 +109,7 @@ const Register = () => {
             placeholder="Пароль"
           />
           {formik.errors.password && (
-            <div className="form-error flex">
+            <div className="error flex">
               <WarningSvg /> <span>{formik.errors.password}</span>
             </div>
           )}

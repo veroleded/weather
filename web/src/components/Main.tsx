@@ -15,7 +15,6 @@ const Main = () => {
   useEffect(()=> {
    dispatch(fetchPosts())
   }, [dispatch])
-  console.log(statePosts);
   return (
     <div>Main</div>
   )

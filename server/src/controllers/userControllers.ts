@@ -22,7 +22,6 @@ export const register = async (req: Request, res: Response) => {
         name,
         email,
         passwordHash: hash,
-        avatarUrl: avatarUrl ?? '/uploads/noavatar.png',
       },
     });
 
@@ -107,3 +106,40 @@ export const getMe = async (req: RequestCustom, res: Response) => {
     });
   }
 };
+
+export const changeMe = async (req: RequestCustom, res: Response) => {
+  console.log(req.body);
+  try {
+    const user = await prisma.user.update({
+      where: {
+        id: req.userId,
+      },
+      data: {
+        ...req.body
+      },
+    });
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const deleteAvatar = async (req: RequestCustom, res: Response) => {
+  try {
+    const user = await prisma.user.update ({
+      where: {
+        id: req.userId,
+      },
+      data: {
+        avatarUrl: null,
+      }
+    });
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Server error',
+    })
+  }
+}

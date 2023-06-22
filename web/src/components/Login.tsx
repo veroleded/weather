@@ -68,7 +68,7 @@ export const Login = () => {
             placeholder="Email"
           />
           {formik.errors.email && (
-            <div className="form-error flex">
+            <div className="error flex">
               <WarningSvg /> <span>{formik.errors.email}</span>
             </div>
           )}
@@ -86,12 +86,12 @@ export const Login = () => {
             placeholder="Пароль"
           />
           {formik.errors.password && (
-            <div className="form-error flex">
+            <div className="error flex">
               <WarningSvg /> <span>{formik.errors.password}</span>
             </div>
           )}
           {isErrorAuth && (
-            <div className="form-error flex">
+            <div className="error flex">
               <WarningSvg /> <span>{'Неверный логин или пароль'}</span>
             </div>
           )}

@@ -15,7 +15,6 @@ export const register = async (req, res) => {
                 name,
                 email,
                 passwordHash: hash,
-                avatarUrl: avatarUrl ?? '/uploads/noavatar.png',
             },
         });
         const token = jwt.sign({
@@ -90,6 +89,24 @@ export const getMe = async (req, res) => {
         res.status(403).json({
             message: 'Access denied',
         });
+    }
+};
+export const changeMe = async (req, res) => {
+    console.log(req.body);
+    try {
+        const user = await prisma.user.update({
+            where: {
+                id: req.userId,
+            },
+            data: {
+                avatarUrl: req.body.avatarUrl
+            },
+        });
+        res.json(user);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
     }
 };
 //# sourceMappingURL=userControllers.js.map

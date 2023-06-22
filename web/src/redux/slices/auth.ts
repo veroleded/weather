@@ -7,7 +7,8 @@ export interface IUserData {
   id: number;
   name: string;
   email: string;
-  avatarUrl?: string;
+  description: string | null;
+  avatarUrl: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -35,7 +36,7 @@ export const fetchAuth = createAsyncThunk(
 export const fetchAuthMe = createAsyncThunk(
   'auth/fetchAuthMe',
   async () => {
-    const { data } = await axiosInstance.get(apiRoutes.getMe());
+    const { data } = await axiosInstance.get(apiRoutes.me());
     return data;
   },
 );
@@ -56,6 +57,9 @@ const authSlice = createSlice({
       state.data = null;
       state.isAuth = false;
     },
+    changeData: (state, { payload }) => {
+      state.data = payload;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -103,4 +107,4 @@ const authSlice = createSlice({
 
 export const selectIsAuth = (state: RootState) => state.auth.isAuth
 export const authReducer = authSlice.reducer;
-export const { logout } = authSlice.actions;
+export const { logout, changeData } = authSlice.actions;

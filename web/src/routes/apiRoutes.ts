@@ -1,9 +1,11 @@
 const apiRoutes =  {
   login: () => '/auth/login',
   register: () => 'auth/register',
-  getMe: () => 'auth/me',
+  me: () => '/me',
   getPosts: () => '/posts',
-  getAvatar: (filename: string) => `/uploads/${filename}`
+  getAvatar: (filename: string) => `/uploads/${filename}`,
+  uploads: () => '/uploads',
+  avatar: () => '/me/avatar'
 };
 
 export default apiRoutes;

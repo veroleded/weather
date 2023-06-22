@@ -37,7 +37,6 @@ const postSlice = createSlice({
       .addCase(fetchPosts.fulfilled, (state, {payload}) => {
         const ids: number[] = [];
         const entities: Record<string, Post> = {};
-        console.log(payload);
         (payload as unknown as Post[]).forEach((post) => {
         ids.push(post.id);
         entities[post.id] = post;
