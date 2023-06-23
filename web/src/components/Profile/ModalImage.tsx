@@ -5,7 +5,6 @@ import apiRoutes from '../../routes/apiRoutes';
 import type { AppDispatch } from '../../redux/store';
 import { useDispatch } from 'react-redux';
 import { changeData } from '../../redux/slices/auth';
-import noavatar from '../../../public/noavatar.png';
 
 type DispatchFunc = () => AppDispatch;
 const useAppDispatch: DispatchFunc = useDispatch;

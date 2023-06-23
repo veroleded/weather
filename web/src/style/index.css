@@ -177,19 +177,46 @@ header {
   border-radius: 4px;
   padding: 10px;
   box-shadow: 0px 0px 10px rgb(69, 118, 255);
-  justify-content: space-between;
+  justify-content: start;
+  flex-wrap: wrap;
 }
 
 .info-container {
   margin: 10px;
-  width: max-content;
+  width: 700px;
   flex-direction: column;
 }
 
-.changer-container {
-  margin: 10px;
-  width: max-content;
-  flex-direction: column;
+.info-container > div {
+  padding: 10px 20px;
+  margin: 30px;
+  border-bottom: 1px solid rgb(158, 182, 250);
+  border-radius: 3px;
+}
+
+.info-container > div > p {
+  margin: 0;
+}
+
+.info-container > div > button {
+  position: relative;
+  bottom: 28px;
+  margin: 0 10px;
+  border: none;
+  padding: 0;
+  background-color: inherit;
+  cursor: pointer;
+  color: rgb(122, 155, 248)
+  
+}
+
+.info-block-header {
+  position: relative;
+  background-color: rgb(218, 228, 255);
+  margin: 0;
+  padding: 0;
+  bottom: 30px;
+  color: rgb(69, 118, 255);
 }
 
 .avatar-container {

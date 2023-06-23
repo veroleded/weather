@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { AppDispatch, RootState } from '../../redux/store';
 import { IUserData, changeData, selectIsAuth } from '../../redux/slices/auth';
 import apiRoutes from '../../routes/apiRoutes';
-import { useNavigate } from 'react-router-dom';
 import ModalImage from './ModalImage';
 import noavatar from '../../images/noavatar.png';
 import { getImageLink } from '../../consts';
 import axiosInstance from '../../axios';
+import InfoBlock from './InfoBlock';
 
 type DispatchFunc = () => AppDispatch;
 const useAppDispatch: DispatchFunc = useDispatch;
@@ -18,10 +20,6 @@ const Profile = () => {
   const navigate = useNavigate();
   const userState = useSelector((state: RootState) => state.auth.data);
   const [modalOpen, setModalOpen] = useState(false);
-  const [nameChanger, setNameChanger] = useState(false);
-  const nameChangerHandler = () => {
-    setNameChanger(true);
-  };
 
   const openModalHandler = () => {
     setModalOpen(true);
@@ -56,13 +54,15 @@ const Profile = () => {
             <button className="btn" onClick={openModalHandler}>
               {'Изменить'}
             </button>
-            <button className="btn btn-danger" onClick={deleteAvatarHandler}>
+            { userState?.avatarUrl && <button className="btn btn-danger" onClick={deleteAvatarHandler}>
               {'Удалить'}
-            </button>
+            </button>}
           </div>
         </div>
-        <div className='info-container'>
-          <div></div>
+        <div className="info-container">
+          <InfoBlock name={userState?.name} />
+          <InfoBlock description={userState?.description} />
+          <InfoBlock email={userState?.email} />
         </div>
       </div>
     </div>
